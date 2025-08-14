@@ -1,6 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
+import { User } from "lucide-react";
+
+<User className="w-8 h-8 text-secondary mx-auto mb-3" />
+
 import { ChevronLeft, ChevronRight, Play, Pause, RotateCcw, Car, Users, Clock, CheckCircle, UserCheck, ArrowRight, Grid3X3, MapPin, Settings, Cpu } from 'lucide-react';
 
 interface Slide {
@@ -177,10 +181,48 @@ const IncidenceMatrix = () => {
 };
 
 const slides: Slide[] = [
-  {
+   {
     id: 1,
     title: "Système de Réservation de Stationnement",
-    subtitle: "Modélisation par Réseaux de Petri - Petri Playland",
+    subtitle: "Modélisation par Réseaux de Petri  ",
+    icon: <Car className="w-12 h-12 text-primary" />,
+    content: (
+      <div className="text-center space-y-6">
+        <div className="animate-fade-in-up">
+          <div className="text-6xl mb-6">👥</div>
+          <p className="text-subtitle text-muted-foreground mb-6">
+            GROUPE
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 gap-6 mt-8">
+          <div className="gradient-card p-6 rounded-lg text-center animate-fade-in-up delay-200">
+            <User className="w-8 h-8 text-secondary mx-auto mb-3" />
+            <h3 className="font-semibold text-lg mb-2">RAKOTONIRINA Rado Léonce</h3>
+            <h4 className="">
+              N° 1186H-F <br />
+              M1 IG G1
+            </h4>
+          </div>
+          
+          <div className="gradient-card p-6 rounded-lg text-center animate-fade-in-up delay-300">
+           <User className="w-8 h-8 text-secondary mx-auto mb-3" />
+           <h3 className="font-semibold text-lg mb-2">RAZAFIMIANDRISOARIVONY <br /> Onjanirina Théodose Lyoncia</h3>
+            <h4 className="">
+              N° 1287H-F <br />
+              M1 IG G1
+            </h4>
+          </div>
+        </div>
+
+      
+      </div>
+    )
+  },
+  {
+    id: 2,
+    title: "Système de Réservation de Stationnement",
+    subtitle: "Modélisation par Réseaux de Petri ",
     icon: <Car className="w-12 h-12 text-primary" />,
     content: (
       <div className="text-center space-y-6">
@@ -230,7 +272,7 @@ const slides: Slide[] = [
     )
   },
   {
-    id: 2,
+    id: 3,
     title: "Composants du Réseau de Petri",
     icon: <Grid3X3 className="w-8 h-8 text-secondary" />,
     content: (
@@ -311,7 +353,7 @@ const slides: Slide[] = [
     )
   },
   {
-    id: 3,
+    id: 4,
     title: "État Initial du Système (M0)",
     icon: <Play className="w-8 h-8 text-primary" />,
     content: (
@@ -373,78 +415,121 @@ const slides: Slide[] = [
       </div>
     )
   },
-  {
-    id: 4,
-    title: "Séquence d'Exécution - Étapes 1 à 5",
-    icon: <ArrowRight className="w-8 h-8 text-accent" />,
-    content: (
-      <div className="space-y-6">
-        <div className="animate-fade-in-up">
-          <p className="text-lg text-muted-foreground mb-8">
-            Suivez l'évolution du système à travers un cycle complet de réservation.
+{
+  id: 5,
+  title: "Séquence d'Exécution - Étapes 1 à 5",
+  icon: <ArrowRight className="w-8 h-8 text-accent" />,
+  content: (
+    <div className="space-y-6">
+      <div className="animate-fade-in-up">
+        <p className="text-lg text-muted-foreground mb-8">
+          Suivez l'évolution du système à travers un cycle complet de réservation.
+        </p>
+      </div>
+
+      {/* ===== Colonne unique : une étape par ligne ===== */}
+      <div className="flex flex-col gap-6 w-full">
+        {/* Étape 1 */}
+        <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-left">
+          <h3 className="text-lg font-semibold text-warning mb-3">
+            Étape 1 : Faire une Demande (T1)
+          </h3>
+          <div className="overflow-x-auto">
+            <ParkingPetriVisualization
+              animate={true}
+              step={1}
+              className="w-full max-w-none min-w-[640px] h-auto"
+            />
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Un utilisateur fait une demande → 1 jeton apparaît en P2 (Demandes en Attente)
           </p>
         </div>
-        
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Étapes 1-2 */}
-          <div className="space-y-6">
-            <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-left">
-              <h3 className="text-lg font-semibold text-warning mb-3">Étape 1 : Faire une Demande (T1)</h3>
-              <ParkingPetriVisualization animate={true} step={1} />
-              <p className="text-sm text-muted-foreground mt-2">
-                Un utilisateur fait une demande → 1 jeton apparaît en P2 (Demandes en Attente)
-              </p>
-            </div>
-            
-            <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-left delay-200">
-              <h3 className="text-lg font-semibold text-primary mb-3">Étape 2 : Réserver (T2)</h3>
-              <ParkingPetriVisualization animate={true} step={2} />
-              <p className="text-sm text-muted-foreground mt-2">
-                La demande est traitée → 1 place libre et 1 demande deviennent 1 réservation
-              </p>
-            </div>
-          </div>
 
-          {/* Étapes 3-4-5 */}
-          <div className="space-y-4">
-            <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-right">
-              <h3 className="text-lg font-semibold text-destructive mb-3">Étape 3 : Occuper (T3)</h3>
-              <ParkingPetriVisualization animate={true} step={3} />
-              <p className="text-sm text-muted-foreground mt-2">
-                L'utilisateur arrive → La réservation devient occupation
-              </p>
-            </div>
-            
-            <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-right delay-200">
-              <h3 className="text-lg font-semibold text-success mb-3">Étape 4 : Libérer (T4)</h3>
-              <ParkingPetriVisualization animate={true} step={4} />
-              <p className="text-sm text-muted-foreground mt-2">
-                Fin de parking → Place libre + utilisateur satisfait
-              </p>
-            </div>
-            
-            <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-right delay-300">
-              <h3 className="text-lg font-semibold text-secondary mb-3">Étape 5 : Partir (T5)</h3>
-              <ParkingPetriVisualization animate={true} step={5} />
-              <p className="text-sm text-muted-foreground mt-2">
-                L'utilisateur quitte le système → Retour à l'état initial
-              </p>
-            </div>
+        {/* Étape 2 */}
+        <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-left delay-200">
+          <h3 className="text-lg font-semibold text-primary mb-3">
+            Étape 2 : Réserver (T2)
+          </h3>
+          <div className="overflow-x-auto">
+            <ParkingPetriVisualization
+              animate={true}
+              step={2}
+              className="w-full max-w-none min-w-[640px] h-auto"
+            />
           </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            La demande est traitée → 1 place libre et 1 demande deviennent 1 réservation
+          </p>
         </div>
 
-        <div className="gradient-accent p-6 rounded-lg border border-border/50 animate-fade-in-up delay-400">
-          <h3 className="text-lg font-semibold text-accent-foreground mb-3 text-center">Cycle Complet</h3>
-          <p className="text-accent-foreground/90 text-center">
-            Le système retrouve son état initial après chaque cycle, garantissant la conservation des ressources 
-            et permettant de traiter de nouvelles demandes en continu.
+        {/* Étape 3 */}
+        <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-right">
+          <h3 className="text-lg font-semibold text-destructive mb-3">
+            Étape 3 : Occuper (T3)
+          </h3>
+          <div className="overflow-x-auto">
+            <ParkingPetriVisualization
+              animate={true}
+              step={3}
+              className="w-full max-w-none min-w-[640px] h-auto"
+            />
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            L'utilisateur arrive → La réservation devient occupation
+          </p>
+        </div>
+
+        {/* Étape 4 */}
+        <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-right delay-200">
+          <h3 className="text-lg font-semibold text-success mb-3">
+            Étape 4 : Libérer (T4)
+          </h3>
+          <div className="overflow-x-auto">
+            <ParkingPetriVisualization
+              animate={true}
+              step={4}
+              className="w-full max-w-none min-w-[640px] h-auto"
+            />
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            Fin de parking → Place libre + utilisateur satisfait
+          </p>
+        </div>
+
+        {/* Étape 5 */}
+        <div className="gradient-card p-4 rounded-lg border border-border/50 animate-slide-in-right delay-300">
+          <h3 className="text-lg font-semibold text-secondary mb-3">
+            Étape 5 : Partir (T5)
+          </h3>
+          <div className="overflow-x-auto">
+            <ParkingPetriVisualization
+              animate={true}
+              step={5}
+              className="w-full max-w-none min-w-[640px] h-auto"
+            />
+          </div>
+          <p className="text-sm text-muted-foreground mt-2">
+            L'utilisateur quitte le système → Retour à l'état initial
           </p>
         </div>
       </div>
-    )
-  },
+
+      <div className="gradient-accent p-6 rounded-lg border border-border/50 animate-fade-in-up delay-400">
+        <h3 className="text-lg font-semibold text-accent-foreground mb-3 text-center">
+          Cycle Complet
+        </h3>
+        <p className="text-accent-foreground/90 text-center">
+          Le système retrouve son état initial après chaque cycle, garantissant la conservation des ressources
+          et permettant de traiter de nouvelles demandes en continu.
+        </p>
+      </div>
+    </div>
+  )
+}
+,
   {
-    id: 5,
+    id: 6,
     title: "Matrice d'Incidence",
     icon: <Grid3X3 className="w-8 h-8 text-success" />,
     content: (
@@ -503,7 +588,7 @@ const slides: Slide[] = [
     )
   },
   {
-    id: 6,
+    id: 7,
     title: "Conclusion et Perspectives",
     icon: <CheckCircle className="w-8 h-8 text-warning" />,
     content: (
@@ -581,7 +666,8 @@ const slides: Slide[] = [
             </Button>
             <Button variant="outline" className="border-primary-foreground text-primary-foreground hover:bg-primary-foreground hover:text-primary">
               <Play className="w-4 h-4 mr-2" />
-              Lancer la Simulation
+              
+              <a href="http://localhost:8081/">Lancer la Simulation</a>
             </Button>
           </div>
         </div>
@@ -625,7 +711,7 @@ export default function PetriPresentation() {
             <div className="w-8 h-8 gradient-primary rounded-lg flex items-center justify-center">
               <Car className="w-4 h-4 text-primary-foreground" />
             </div>
-            <h1 className="text-xl font-bold">Petri Playland - Système de Stationnement</h1>
+            <h1 className="text-xl font-bold">Système de Réservation de Stationnement</h1>
           </div>
           
           <div className="flex items-center gap-2">
